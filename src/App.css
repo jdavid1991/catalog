@@ -1,4 +1,7 @@
-.nl-wrap {
+div.nl-wrap,
+.nl-wrap,
+[class*="nl-wrap"],
+[id*="nl-wrap"] {
   display: none !important;
 }
 

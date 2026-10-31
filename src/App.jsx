@@ -78,6 +78,25 @@ const products = [
 function App() {
   const [selectedProduct, setSelectedProduct] = useState(null);
 
+  const hideNlWraps = () => {
+    document.querySelectorAll('.nl-wrap, [class*="nl-wrap"], [id*="nl-wrap"]').forEach((element) => {
+      element.style.display = 'none';
+      element.setAttribute('hidden', 'true');
+    });
+  };
+
+  if (typeof window !== 'undefined') {
+    window.addEventListener('DOMContentLoaded', hideNlWraps);
+    const observer = new MutationObserver(() => {
+      hideNlWraps();
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+  }
+
   const formatCOP = (value) =>
     new Intl.NumberFormat("es-CO", {
       style: "currency",
