@@ -80,23 +80,36 @@ function App() {
 
   const hideNlWraps = () => {
     document
-      .querySelectorAll('.nl-wrap, [class*="nl-wrap"], [id*="nl-wrap"]')
+      .querySelectorAll(
+        '#nl-badge-frame, #nl-hud-frame, .nl-wrap, [class*="nl-wrap"], [id*="nl-wrap"]',
+      )
       .forEach((element) => {
+        if (
+          element.tagName === "IFRAME" ||
+          element.id === "nl-badge-frame" ||
+          element.id === "nl-hud-frame"
+        ) {
+          element.remove();
+          return;
+        }
+
         element.style.display = "none";
         element.setAttribute("hidden", "true");
       });
   };
 
   if (typeof window !== "undefined") {
-    window.addEventListener("DOMContentLoaded", hideNlWraps);
+    hideNlWraps();
     const observer = new MutationObserver(() => {
       hideNlWraps();
     });
 
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true,
-    });
+    if (document.body) {
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+      });
+    }
   }
 
   const formatCOP = (value) =>
