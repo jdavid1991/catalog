@@ -2,13 +2,19 @@ export function Pagination({
   pageNumbers,
   safeCurrentPage,
   setCurrentPage,
-  isHalloweenSeason,
+  themeMode = "default",
 }) {
+  const isHalloween = themeMode === "halloween";
+  const isChristmas = themeMode === "christmas";
   return (
     <div className="flex flex-col items-center justify-center gap-2 pt-6">
       <span
         className={`text-[10px] font-bold uppercase tracking-[0.18em] ${
-          isHalloweenSeason ? "text-white" : "text-slate-500"
+          isHalloween
+            ? "text-white"
+            : isChristmas
+              ? "text-emerald-700"
+              : "text-slate-500"
         }`}
       >
         Página

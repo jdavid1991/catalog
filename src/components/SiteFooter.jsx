@@ -1,17 +1,38 @@
-export function SiteFooter({ isHalloweenSeason, currentYear }) {
+export function SiteFooter({ themeMode = "default", currentYear }) {
+  const isHalloween = themeMode === "halloween";
+  const isChristmas = themeMode === "christmas";
+
   return (
     <footer
-      className={`mt-10 border-t pt-6 ${isHalloweenSeason ? "border-orange-500/20" : "border-slate-200"}`}
+      className={`mt-10 border-t pt-6 ${
+        isHalloween
+          ? "border-orange-500/20"
+          : isChristmas
+            ? "border-emerald-200"
+            : "border-slate-200"
+      }`}
     >
       <div className="flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
         <div>
           <p
-            className={`text-base font-black tracking-[-0.04em] ${isHalloweenSeason ? "text-orange-50" : "text-slate-900"}`}
+            className={`text-base font-black tracking-[-0.04em] ${
+              isHalloween
+                ? "text-orange-50"
+                : isChristmas
+                  ? "text-emerald-950"
+                  : "text-slate-900"
+            }`}
           >
             Thread House
           </p>
           <p
-            className={`mt-1 text-sm ${isHalloweenSeason ? "text-orange-100/80" : "text-slate-500"}`}
+            className={`mt-1 text-sm ${
+              isHalloween
+                ? "text-orange-100/80"
+                : isChristmas
+                  ? "text-emerald-700"
+                  : "text-slate-500"
+            }`}
           >
             © {currentYear} · Bogotá, Colombia
           </p>
@@ -19,13 +40,21 @@ export function SiteFooter({ isHalloweenSeason, currentYear }) {
 
         <div
           className={`flex flex-wrap items-center justify-center gap-3 text-xs font-semibold uppercase tracking-[0.14em] sm:justify-end ${
-            isHalloweenSeason ? "text-orange-100/80" : "text-slate-500"
+            isHalloween
+              ? "text-orange-100/80"
+              : isChristmas
+                ? "text-emerald-700"
+                : "text-slate-500"
           }`}
         >
           <span>Catálogo</span>
           <span
             className={
-              isHalloweenSeason ? "text-orange-200/60" : "text-slate-300"
+              isHalloween
+                ? "text-orange-200/60"
+                : isChristmas
+                  ? "text-emerald-300"
+                  : "text-slate-300"
             }
           >
             •
@@ -33,7 +62,11 @@ export function SiteFooter({ isHalloweenSeason, currentYear }) {
           <span>Envíos</span>
           <span
             className={
-              isHalloweenSeason ? "text-orange-200/60" : "text-slate-300"
+              isHalloween
+                ? "text-orange-200/60"
+                : isChristmas
+                  ? "text-emerald-300"
+                  : "text-slate-300"
             }
           >
             •
