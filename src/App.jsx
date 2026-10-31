@@ -79,14 +79,16 @@ function App() {
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   const hideNlWraps = () => {
-    document.querySelectorAll('.nl-wrap, [class*="nl-wrap"], [id*="nl-wrap"]').forEach((element) => {
-      element.style.display = 'none';
-      element.setAttribute('hidden', 'true');
-    });
+    document
+      .querySelectorAll('.nl-wrap, [class*="nl-wrap"], [id*="nl-wrap"]')
+      .forEach((element) => {
+        element.style.display = "none";
+        element.setAttribute("hidden", "true");
+      });
   };
 
-  if (typeof window !== 'undefined') {
-    window.addEventListener('DOMContentLoaded', hideNlWraps);
+  if (typeof window !== "undefined") {
+    window.addEventListener("DOMContentLoaded", hideNlWraps);
     const observer = new MutationObserver(() => {
       hideNlWraps();
     });
