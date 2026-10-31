@@ -3,14 +3,14 @@ import { useState } from "react";
 const products = [
   {
     id: 1,
-    name: "Camiseta Halloween",
+    name: "Camiseta Snoopy",
     category: "Urban",
     price: 40000,
-    color: "Negro",
+    color: "Blanco",
     material: "Algodón 100%",
     badge: "Nuevo",
     palette: "bg-slate-900",
-    image: "/images/halloween.gif",
+    image: "/images/snoopy.gif",
     description: "Ideal para looks casuales con corte cómodo y estilo moderno.",
   },
   {
