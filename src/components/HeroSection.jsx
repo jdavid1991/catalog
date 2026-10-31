@@ -3,8 +3,7 @@ export function HeroSection({ themeMode = "default", formatCOP }) {
   const isChristmas = themeMode === "christmas";
   const stats = [
     ["50+", "ventas"],
-    ["4.5", "valoración"],
-    ["24h", "envío"],
+    ["4.5", "valoración"]
   ];
 
   return (

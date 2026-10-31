@@ -4,7 +4,7 @@ export function CatalogHeader({ themeMode = "default" }) {
 
   return (
     <header
-      className={`flex flex-col gap-4 rounded-[28px] border px-4 py-4 shadow-[0_12px_30px_rgba(15,23,42,0.06)] backdrop-blur-md sm:flex-row sm:items-center sm:justify-between sm:px-6 ${
+      className={`flex items-center justify-between gap-3 rounded-[28px] border px-4 py-4 shadow-[0_12px_30px_rgba(15,23,42,0.06)] backdrop-blur-md sm:px-6 ${
         isHalloween
           ? "border-orange-500/30 bg-[#23131c]/70"
           : isChristmas
@@ -12,13 +12,13 @@ export function CatalogHeader({ themeMode = "default" }) {
             : "border-slate-200/80 bg-white/70"
       }`}
     >
-      <div className="flex items-center gap-3">
-        <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-slate-950 to-amber-500 text-lg font-black text-white">
+      <div className="flex min-w-0 items-center gap-3">
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-slate-950 to-amber-500 text-lg font-black text-white">
           T
         </div>
-        <div>
+        <div className="min-w-0">
           <p
-            className={`text-base font-bold ${
+            className={`truncate text-base font-bold ${
               isHalloween
                 ? "text-orange-50"
                 : isChristmas
@@ -42,17 +42,17 @@ export function CatalogHeader({ themeMode = "default" }) {
         </div>
       </div>
 
-      <div className="flex w-full items-center justify-end sm:w-auto">
+      <div className="flex shrink-0 items-center justify-end sm:w-auto">
         {isChristmas ? (
           <span
-            className="text-3xl leading-none sm:text-4xl"
+            className="text-[2rem] leading-none sm:text-4xl"
             aria-label="Navidad"
           >
             🎅🏻
           </span>
         ) : isHalloween ? (
           <span
-            className="text-3xl leading-none sm:text-4xl"
+            className="text-[2rem] leading-none sm:text-4xl"
             aria-label="Halloween"
           >
             🧙🏻
