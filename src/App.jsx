@@ -129,7 +129,7 @@ function App() {
           ? "bg-[radial-gradient(circle_at_top,_rgba(34,197,94,0.16),_transparent_35%),linear-gradient(180deg,#fdfdf7_0%,#f7f5ed_100%)] text-emerald-950"
           : isHalloweenSeason
             ? "bg-[radial-gradient(circle_at_top,_rgba(251,146,60,0.18),_transparent_35%),linear-gradient(180deg,#1a0f1d_0%,#130b16_100%)] text-orange-50"
-            : "bg-[radial-gradient(circle_at_top,_rgba(148,163,184,0.18),_transparent_30%),linear-gradient(180deg,#f8fafc_0%,#eef3f9_38%,#f5f7fb_100%)] text-slate-900"
+            : "bg-[radial-gradient(circle_at_top,_rgba(148,163,184,0.24),_transparent_28%),linear-gradient(180deg,#edf3f9_0%,#e3ebf5_38%,#edf3f8_100%)] text-slate-900"
       }`}
     >
       {isChristmasSeason ? (

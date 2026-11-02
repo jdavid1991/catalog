@@ -16,7 +16,7 @@ export function ProductGrid({
               ? "border-orange-500/30 bg-[#23131c]/90"
               : isChristmas
                 ? "border-emerald-200/80 bg-white/80"
-                : "border-slate-200/80 bg-white/90"
+                : "border-slate-200/80 bg-slate-50/90"
           }`}
         >
           <button
@@ -31,7 +31,7 @@ export function ProductGrid({
                   ? "bg-[#1f1019]"
                   : isChristmas
                     ? "bg-emerald-50"
-                    : "bg-[#f3f4f6]"
+                    : "bg-[#edf2f7]"
               }`}
             >
               <span
@@ -53,7 +53,7 @@ export function ProductGrid({
                       ? "bg-[#1a0f1d]"
                       : isChristmas
                         ? "bg-white"
-                        : "bg-[#f3f4f6]"
+                        : "bg-[#e9eef5]"
                   }`}
                 >
                   <img
@@ -83,7 +83,7 @@ export function ProductGrid({
           </button>
 
           <div
-            className={`space-y-3 p-4 ${isHalloween ? "bg-[#23131c]" : isChristmas ? "bg-emerald-50/60" : "bg-white"}`}
+            className={`space-y-3 p-4 ${isHalloween ? "bg-[#23131c]" : isChristmas ? "bg-emerald-50/60" : "bg-slate-50"}`}
           >
             <div className="flex items-center justify-between gap-3">
               <span
