@@ -12,26 +12,40 @@ export function ProductColorPalette({ color }) {
   const selectedColor = colorName.toLowerCase();
 
   return (
-    <span
+    <svg
       className="product-color-palette"
+      width="76"
+      height="16"
+      viewBox="0 0 76 16"
       role="img"
+      focusable="false"
       aria-label={`Paleta: blanco, negro, azul y rojo. Color de la camiseta: ${colorName || "No especificado"}.`}
     >
-      {shirtColors.map(({ name, value, markerColor }) => {
+      {shirtColors.map(({ name, value, markerColor }, index) => {
         const isSelected = selectedColor === name.toLowerCase();
 
         return (
-          <span
+          <g
             key={name}
-            className="product-color-palette__swatch"
-            style={{ backgroundColor: value, color: markerColor }}
-            title={isSelected ? `${name} (color de la camiseta)` : name}
+            transform={`translate(${8 + index * 20} 8)`}
             aria-hidden="true"
           >
-            {isSelected ? "X" : null}
-          </span>
+            <title>
+              {isSelected ? `${name} (color de la camiseta)` : name}
+            </title>
+            <circle r="7.5" fill={value} stroke="#64748b" strokeOpacity="0.6" />
+            {isSelected && (
+              <path
+                d="M-2.5 -2.5 2.5 2.5 M-2.5 2.5 2.5 -2.5"
+                fill="none"
+                stroke={markerColor}
+                strokeWidth="1.6"
+                strokeLinecap="round"
+              />
+            )}
+          </g>
         );
       })}
-    </span>
+    </svg>
   );
 }
