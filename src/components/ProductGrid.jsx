@@ -1,3 +1,5 @@
+import { ProductColorPalette } from "./ProductColorPalette";
+
 export function ProductGrid({
   products,
   themeMode = "default",
@@ -147,7 +149,7 @@ export function ProductGrid({
               }`}
             >
               <span>Talla: {product.size}</span>
-              <span>{product.color}</span>
+              <ProductColorPalette color={product.color} />
               <span>{product.material}</span>
             </div>
 
