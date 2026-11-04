@@ -1,13 +1,20 @@
 import { ProductColorPalette } from "./ProductColorPalette";
+import { ProductImage } from "./ProductImage";
 
 export function ProductGrid({
   products,
   themeMode = "default",
   onSelectProduct,
+  onColorChange,
   formatCOP,
 }) {
   const isHalloween = themeMode === "halloween";
   const isChristmas = themeMode === "christmas";
+  const detailsTextClassName =
+    !isHalloween && !isChristmas
+      ? "text-base font-semibold text-slate-900"
+      : "text-xs";
+
   return (
     <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
       {products.map((product) => (
@@ -48,39 +55,33 @@ export function ProductGrid({
                 {product.badge}
               </span>
 
-              {product.image ? (
-                <div
-                  className={`relative aspect-[4/5] w-full overflow-hidden ${
-                    isHalloween
-                      ? "bg-[#1a0f1d]"
-                      : isChristmas
-                        ? "bg-white"
-                        : "bg-[#e9eef5]"
+              <div
+                className={`relative aspect-4/5 w-full overflow-hidden ${
+                  isHalloween
+                    ? "bg-[#1a0f1d]"
+                    : isChristmas
+                      ? "bg-white"
+                      : "bg-[#e9eef5]"
+                }`}
+              >
+                <ProductImage
+                  src={product.image}
+                  alt={`${product.name}, color ${product.colorLabel}`}
+                  className={`h-full w-full object-cover object-center transition duration-300 ${
+                    product.available === false
+                      ? "scale-105 grayscale-[0.2] brightness-75"
+                      : "hover:scale-[1.02]"
                   }`}
-                >
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className={`h-full w-full object-cover object-center transition duration-300 ${
-                      product.available === false
-                        ? "scale-105 grayscale-[0.2] brightness-75"
-                        : "hover:scale-[1.02]"
-                    }`}
-                  />
+                />
 
-                  {product.available === false && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-slate-950/60 backdrop-blur-[1px]">
-                      <span className="rounded-full border border-red-200/70 bg-red-600/80 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.18em] text-white shadow-lg backdrop-blur-sm">
-                        Agotado
-                      </span>
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <div className="flex aspect-[4/5] w-full items-center justify-center bg-[#1f1f24]">
-                  <div className="h-40 w-28 rounded-[24px] bg-slate-900 shadow-lg" />
-                </div>
-              )}
+                {product.available === false && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-slate-950/60 backdrop-blur-[1px]">
+                    <span className="rounded-full border border-red-200/70 bg-red-600/80 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.18em] text-white shadow-lg backdrop-blur-sm">
+                      Agotado
+                    </span>
+                  </div>
+                )}
+              </div>
             </div>
           </button>
 
@@ -140,31 +141,40 @@ export function ProductGrid({
             </div>
 
             <div
-              className={`flex flex-wrap items-center justify-between gap-2 text-xs ${
+              className={`flex flex-wrap items-center justify-between gap-2 ${detailsTextClassName} ${
                 isHalloween
                   ? "text-orange-100/75"
                   : isChristmas
                     ? "text-emerald-800/80"
-                    : "text-slate-500"
+                    : ""
               }`}
             >
               <span>Talla: {product.size}</span>
-              <ProductColorPalette color={product.color} />
               <span>{product.material}</span>
             </div>
 
-            <div className="pt-1">
-              <strong
-                className={`text-[2rem] font-black tracking-[-0.05em] ${
-                  isHalloween
-                    ? "text-orange-50"
-                    : isChristmas
-                      ? "text-emerald-950"
-                      : "text-slate-900"
-                }`}
-              >
-                {formatCOP(product.price)}
-              </strong>
+            <div className="space-y-1">
+              <ProductColorPalette
+                className={detailsTextClassName}
+                variants={product.variants}
+                color={product.color}
+                productName={product.name}
+                onColorChange={(color) => onColorChange(product.id, color)}
+              />
+
+              <div>
+                <strong
+                  className={`text-[2rem] font-black tracking-[-0.05em] ${
+                    isHalloween
+                      ? "text-orange-50"
+                      : isChristmas
+                        ? "text-emerald-950"
+                        : "text-slate-900"
+                  }`}
+                >
+                  {formatCOP(product.price)}
+                </strong>
+              </div>
             </div>
           </div>
         </article>

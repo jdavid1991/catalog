@@ -9,11 +9,14 @@ import { Pagination } from "./components/Pagination";
 import { SiteFooter } from "./components/SiteFooter";
 import { WhatsAppButton } from "./components/WhatsAppButton";
 import { ProductModal } from "./components/ProductModal";
+import { resolveProductVariant } from "./utils/productVariants";
 
 const filters = ["Niñ@s", "Mujeres", "Todos"];
 
 function App() {
-  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedProductId, setSelectedProductId] = useState(null);
+  const [selectedColors, setSelectedColors] = useState({});
+  const [allProducts, setAllProducts] = useState(products);
   const [selectedGender, setSelectedGender] = useState("Niñ@s");
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -91,15 +94,10 @@ function App() {
       maximumFractionDigits: 0,
     }).format(value);
 
-  const filteredProducts =
-    selectedGender === "Todos"
-      ? products
-      : products.filter((product) => product.gender === selectedGender);
-
   const visibleProducts =
     selectedGender === "Todos"
-      ? [...filteredProducts].sort(() => Math.random() - 0.5)
-      : filteredProducts;
+      ? allProducts
+      : products.filter((product) => product.gender === selectedGender);
 
   const itemsPerPage = 12;
   const pageCount = Math.max(
@@ -112,14 +110,40 @@ function App() {
     { length: pageCount },
     (_, index) => index + 1,
   );
-  const paginatedProducts = visibleProducts.slice(
-    (safeCurrentPage - 1) * itemsPerPage,
-    safeCurrentPage * itemsPerPage,
+  const paginatedProducts = visibleProducts
+    .slice((safeCurrentPage - 1) * itemsPerPage, safeCurrentPage * itemsPerPage)
+    .map((product) =>
+      resolveProductVariant(product, selectedColors[product.id]),
+    );
+
+  const selectedProduct = products.find(
+    (product) => product.id === selectedProductId,
   );
+  const modalProduct = selectedProduct
+    ? resolveProductVariant(selectedProduct, selectedColors[selectedProductId])
+    : null;
 
   const handleFilterChange = (filter) => {
+    if (filter === "Todos") {
+      const shuffledProducts = [...products];
+
+      for (let index = shuffledProducts.length - 1; index > 0; index -= 1) {
+        const randomIndex = Math.floor(Math.random() * (index + 1));
+        [shuffledProducts[index], shuffledProducts[randomIndex]] = [
+          shuffledProducts[randomIndex],
+          shuffledProducts[index],
+        ];
+      }
+
+      setAllProducts(shuffledProducts);
+    }
+
     setSelectedGender(filter);
     setCurrentPage(1);
+  };
+
+  const handleColorChange = (productId, color) => {
+    setSelectedColors((previous) => ({ ...previous, [productId]: color }));
   };
 
   return (
@@ -211,7 +235,8 @@ function App() {
             <ProductGrid
               products={paginatedProducts}
               themeMode={themeMode}
-              onSelectProduct={setSelectedProduct}
+              onSelectProduct={(product) => setSelectedProductId(product.id)}
+              onColorChange={handleColorChange}
               formatCOP={formatCOP}
             />
 
@@ -227,8 +252,8 @@ function App() {
         <SiteFooter themeMode={themeMode} currentYear={footerYear} />
         <WhatsAppButton />
         <ProductModal
-          selectedProduct={selectedProduct}
-          onClose={() => setSelectedProduct(null)}
+          selectedProduct={modalProduct}
+          onClose={() => setSelectedProductId(null)}
         />
       </div>
     </div>

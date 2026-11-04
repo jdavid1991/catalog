@@ -1,51 +1,81 @@
 import "./ProductColorPalette.css";
 
-const shirtColors = [
-  { name: "Blanco", value: "#ffffff", markerColor: "#0f172a" },
-  { name: "Negro", value: "#000000", markerColor: "#ffffff" },
-  { name: "Azul", value: "#2563eb", markerColor: "#ffffff" },
-  { name: "Rojo", value: "#dc2626", markerColor: "#ffffff" },
-];
+function getMarkerColor(hex) {
+  const digits = hex.slice(1);
+  const expanded =
+    digits.length === 3
+      ? [...digits].map((digit) => digit.repeat(2)).join("")
+      : digits;
+  const channels = [0, 2, 4].map((offset) => {
+    const channel = parseInt(expanded.slice(offset, offset + 2), 16) / 255;
+    return channel <= 0.04045
+      ? channel / 12.92
+      : ((channel + 0.055) / 1.055) ** 2.4;
+  });
+  const luminance =
+    channels[0] * 0.2126 + channels[1] * 0.7152 + channels[2] * 0.0722;
 
-export function ProductColorPalette({ color }) {
-  const colorName = typeof color === "string" ? color.trim() : "";
-  const selectedColor = colorName.toLowerCase();
+  return luminance > 0.179 ? "#0f172a" : "#ffffff";
+}
+
+export function ProductColorPalette({
+  className = "",
+  variants = [],
+  color,
+  productName,
+  onColorChange,
+}) {
+  if (variants.length === 0) return null;
 
   return (
-    <svg
-      className="product-color-palette"
-      width="76"
-      height="16"
-      viewBox="0 0 76 16"
-      role="img"
-      focusable="false"
-      aria-label={`Paleta: blanco, negro, azul y rojo. Color de la camiseta: ${colorName || "No especificado"}.`}
+    <div
+      className={`product-color-palette ${className}`}
+      role="group"
+      aria-label={`Colores de ${productName}`}
     >
-      {shirtColors.map(({ name, value, markerColor }, index) => {
-        const isSelected = selectedColor === name.toLowerCase();
+      <span className="product-color-palette__label">Color:</span>
+
+      {variants.map((variant) => {
+        const isSelected = color === variant.color;
 
         return (
-          <g
-            key={name}
-            transform={`translate(${8 + index * 20} 8)`}
-            aria-hidden="true"
+          <button
+            key={variant.color}
+            type="button"
+            className="product-color-palette__swatch"
+            aria-label={`Color ${variant.label}`}
+            aria-pressed={isSelected}
+            title={variant.label}
+            onClick={() => onColorChange(variant.color)}
           >
-            <title>
-              {isSelected ? `${name} (color de la camiseta)` : name}
-            </title>
-            <circle r="7.5" fill={value} stroke="#64748b" strokeOpacity="0.6" />
-            {isSelected && (
-              <path
-                d="M-2.5 -2.5 2.5 2.5 M-2.5 2.5 2.5 -2.5"
-                fill="none"
-                stroke={markerColor}
-                strokeWidth="1.6"
-                strokeLinecap="round"
-              />
-            )}
-          </g>
+            <span
+              className="product-color-palette__color"
+              style={{
+                backgroundColor: variant.hex,
+                color: getMarkerColor(variant.hex),
+              }}
+              aria-hidden="true"
+            >
+              {isSelected && (
+                <svg
+                  className="product-color-palette__marker"
+                  viewBox="0 0 12 12"
+                  focusable="false"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M2 2 10 10 M10 2 2 10"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              )}
+            </span>
+          </button>
         );
       })}
-    </svg>
+    </div>
   );
 }

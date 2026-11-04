@@ -1,6 +1,55 @@
 .product-color-palette {
-  display: block;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px;
+}
+
+.product-color-palette__swatch {
+  display: inline-flex;
   flex-shrink: 0;
-  width: 76px;
-  height: 16px;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+}
+
+.product-color-palette__swatch:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.product-color-palette__color {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #64748b;
+  border-radius: 50%;
+  transition: transform 150ms ease;
+}
+
+.product-color-palette__swatch:hover .product-color-palette__color {
+  transform: scale(1.05);
+}
+
+.product-color-palette__marker {
+  width: 12px;
+  height: 12px;
+}
+
+.product-color-palette__label {
+  margin-right: 4px;
+  font-size: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-color-palette__color {
+    transition: none;
+  }
 }

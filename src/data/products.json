@@ -6,11 +6,16 @@
     "gender": "Niñ@s",
     "size": "16",
     "price": 30000,
-    "color": "blanco",
     "material": "Algodón 100%",
     "badge": "Nuevo",
     "palette": "bg-slate-900",
-    "image": "/images/snoopy.gif",
+    "variants": [
+      {
+        "color": "blanco",
+        "hex": "#ffffff",
+        "image": "/images/snoopy.gif"
+      }
+    ],
     "available": true,
     "description": "Ideal para looks casuales con corte cómodo y estilo moderno."
   },
@@ -21,11 +26,16 @@
     "gender": "Niñ@s",
     "size": "16",
     "price": 30000,
-    "color": "Blanco",
     "material": "Algodón 100%",
     "badge": "Top",
     "palette": "bg-stone-100",
-    "image": "/images/tom_and_jerry.gif",
+    "variants": [
+      {
+        "color": "blanco",
+        "hex": "#ffffff",
+        "image": "/images/tom_and_jerry.gif"
+      }
+    ],
     "available": false,
     "description": "Versátil, fresca y lista para combinar con cualquier outfit."
   },
