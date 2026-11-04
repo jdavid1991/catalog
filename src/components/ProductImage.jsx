@@ -1,6 +1,14 @@
 import { useState } from "react";
 
-export function ProductImage({ src, alt, className, loading = "lazy" }) {
+export function ProductImage({
+  src,
+  alt,
+  className,
+  loading = "lazy",
+  draggable,
+  onLoad,
+  onError,
+}) {
   const [failedSrc, setFailedSrc] = useState(null);
 
   if (!src || failedSrc === src) {
@@ -23,8 +31,15 @@ export function ProductImage({ src, alt, className, loading = "lazy" }) {
       className={className}
       loading={loading}
       decoding="async"
-      onLoad={() => setFailedSrc(null)}
-      onError={() => setFailedSrc(src)}
+      draggable={draggable}
+      onLoad={(event) => {
+        setFailedSrc(null);
+        onLoad?.(event);
+      }}
+      onError={(event) => {
+        setFailedSrc(src);
+        onError?.(event);
+      }}
     />
   );
 }
