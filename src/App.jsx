@@ -11,7 +11,7 @@ import { WhatsAppButton } from "./components/WhatsAppButton";
 import { ProductModal } from "./components/ProductModal";
 import { resolveProductVariant } from "./utils/productVariants";
 
-const filters = ["Niñ@s", "Mujeres", "Todos"];
+const filters = ["Niñ@s", "Mujeres", "Hombres", "Todos"];
 
 function App() {
   const [selectedProductId, setSelectedProductId] = useState(null);

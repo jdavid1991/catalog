@@ -41,15 +41,21 @@
   },
   {
     "id": 3,
-    "name": "Camiseta Vintage Azul",
+    "name": "Camiseta Mario Bros",
     "category": "Vintage",
-    "gender": "Mujeres",
-    "size": "S / M / L / XL",
-    "price": 32.0,
-    "color": "Azul",
-    "material": "Algodón lavado",
+    "gender": "Niñ@s",
+    "size": "S",
+    "price": 30000,
+    "material": "Algodón 100%",
     "badge": "Edición",
     "palette": "bg-indigo-500",
+        "variants": [
+      {
+        "color": "blanco",
+        "hex": "#ffffff",
+        "image": "/images/tom_and_jerry.gif"
+      }
+    ],
     "image": "/images/camiseta-vintage-azul.jpg",
     "available": true,
     "description": "Acabado retro con una silueta ligera ideal para diario."
@@ -98,5 +104,45 @@
     "image": "/images/camiseta-negra-minimal.jpg",
     "available": true,
     "description": "Simple y elegante, con un ajuste limpio y moderno."
+  },
+  {
+    "id": 7,
+    "name": "Camiseta Urbana Negra",
+    "category": "Urban",
+    "gender": "Hombres",
+    "size": "M / L / XL",
+    "price": 34000,
+    "material": "Algodón premium",
+    "badge": "Top",
+    "palette": "bg-slate-900",
+    "variants": [
+      {
+        "color": "negro",
+        "hex": "#111827",
+        "image": "/images/camiseta-urbana-negra.gif"
+      }
+    ],
+    "available": true,
+    "description": "Un look moderno, sobrio y cómodo para usar todos los días."
+  },
+  {
+    "id": 8,
+    "name": "Camiseta Deportivo Azul",
+    "category": "Deportivo",
+    "gender": "Hombres",
+    "size": "S / M / L / XL",
+    "price": 31000,
+    "material": "Microfibra ligera",
+    "badge": "Popular",
+    "palette": "bg-blue-700",
+    "variants": [
+      {
+        "color": "azul",
+        "hex": "#1d4ed8",
+        "image": "/images/camiseta-deportivo-azul.gif"
+      }
+    ],
+    "available": true,
+    "description": "Ideal para un estilo casual con máxima libertad de movimiento."
   }
 ]

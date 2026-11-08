@@ -13,8 +13,12 @@ export function CatalogHeader({ themeMode = "default" }) {
       }`}
     >
       <div className="flex min-w-0 items-center gap-3">
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-slate-950 to-amber-500 text-lg font-black text-white">
-          T
+        <div className="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-white/80 shadow-sm ring-1 ring-slate-900/20 sm:h-24 sm:w-24">
+          <img
+            src="/images/Thread%20House.png"
+            alt="Thread House logo"
+            className="h-full w-full object-cover"
+          />
         </div>
         <div className="min-w-0">
           <p
